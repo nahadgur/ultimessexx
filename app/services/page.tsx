@@ -21,7 +21,7 @@ return(
 <div className='min-h-screen bg-white'>
 <LeadFormModal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}/>
 <Navigation onOpenModal={()=>setIsModalOpen(true)}/>
-<button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} className={}><ChevronUp className='w-5 h-5'/></button>
+<button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} className='fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50'><ChevronUp className='w-5 h-5'/></button>
 
 <section className='section-padding bg-white border-b border-gray-100'>
 <div className='container-width text-center'>
