@@ -26,7 +26,7 @@ return(
 {/* HERO */}
 <section className="relative bg-gray-900 text-white overflow-hidden min-h-[420px] flex items-end pb-16 pt-32">
   <div className="absolute inset-0 z-0">
-    <img src="https://images.pexels.com/photos/4687905/pexels-photo-4687905.jpeg" className="w-full h-full object-cover" alt="Dental Implant Services" />
+    <img src="https://images.pexels.com/photos/6502343/pexels-photo-6502343.jpeg" className="w-full h-full object-cover" alt="Dental Implant Services" />
     <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-gray-900/30"></div>
   </div>
   <div className="relative z-10 container-width w-full">
