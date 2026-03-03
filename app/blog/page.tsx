@@ -132,36 +132,36 @@ export default function BlogPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-700">
+    <div className="min-h-screen bg-white">
       <LeadFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Navigation onOpenModal={() => setIsModalOpen(true)} />
       <button onClick={scrollToTop}
-        className={`fixed bottom-6 left-6 z-[70] w-12 h-12 bg-slate-100 border border-slate-200 text-slate-500 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        className={`fixed bottom-6 left-6 z-[70] w-10 h-10 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         <ChevronUp className="w-6 h-6" />
       </button>
 
-      <div className="pt-32 pb-24 px-4 min-h-screen bg-white">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="text-center space-y-6">
-            <h1 className="font-display text-4xl md:text-7xl font-black text-slate-900 leading-tight tracking-tight">
+      <div className="section-padding bg-white">
+        <div className="container-width space-y-16">
+          <div className="text-center mb-14">
+            <h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900">
               Dental Implants <span className="text-blue-500 italic">Insights</span>
             </h1>
-            <p className="text-xl text-slate-500 max-w-3xl mx-auto font-medium leading-relaxed">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Expert clinical advice, pricing updates, and patient success stories.
             </p>
-            <div className="max-w-xl mx-auto relative pt-8">
+            <div className="max-w-xl mx-auto relative mt-6">
               <input type="text" placeholder="Search articles by topic..." value={blogSearchQuery}
                 onChange={(e) => { setBlogSearchQuery(e.target.value); setBlogPage(1); }}
-                className="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 text-slate-900 focus:border-blue-500 outline-none transition-all pl-14 shadow-lg" />
-              <Search className="absolute left-5 top-[3.2rem] text-slate-400 w-6 h-6" />
+                className="w-full bg-white border border-gray-200 rounded-xl px-6 py-3 pl-12 text-gray-900 focus:border-brand-500 outline-none transition-all shadow-sm" />
+              <Search className="absolute left-4 top-[0.85rem] text-gray-400 w-6 h-6" />
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {paginatedPosts.map((post) => (
               <Link key={post.Slug} href={`/blog/${post.Slug}`}
-                className="group bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden flex flex-col hover:border-blue-300 hover:shadow-xl transition-all duration-500 shadow-sm">
-                <div className="relative h-56 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50">
+                className="group bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300 shadow-sm">
+                <div className="relative h-56 overflow-hidden bg-gray-50">
                   {post.featuredImage ? (
                     <img src={post.featuredImage} alt={post['Article Title']}
                       className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" />
@@ -169,17 +169,17 @@ export default function BlogPage() {
                     <div className="absolute inset-0 flex items-center justify-center"><div className="text-6xl opacity-10">📝</div></div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/10 to-transparent" />
-                  <div className="absolute top-6 left-6 px-4 py-1.5 bg-blue-500 text-white text-[10px] font-black uppercase rounded-full">
+                  <div className="absolute top-6 left-6 px-4 py-1.5 bg-blue-500 text-white text-xs font-semibold rounded-full">
                     {post.wp_category}
                   </div>
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
-                  <h2 className="text-2xl font-black text-slate-900 mb-4 group-hover:text-blue-500 transition-colors">
+                  <h2 className="text-2xl font-display font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors">
                     {post['Article Title']}
                   </h2>
-                  <p className="text-slate-500 font-medium mb-8 flex-1">{getExcerpt(post['Article Content'])}</p>
-                  <div className="flex items-center gap-2 text-blue-500 font-black uppercase tracking-widest text-[10px]">
-                    Read Article <ArrowUpRight className="w-4 h-4" />
+                  <p className="text-gray-600 text-sm mb-6 flex-1">{getExcerpt(post['Article Content'])}</p>
+                  <div className="flex items-center gap-2 text-brand-600 font-medium text-sm">
+                    Read more <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
               </Link>
@@ -187,14 +187,14 @@ export default function BlogPage() {
           </div>
 
           {filteredPosts.length === 0 && (
-            <div className="text-center text-slate-400 font-medium">No articles found.</div>
+            <div className="text-center text-gray-400">No articles found.</div>
           )}
 
           {totalPages > 1 && (
             <div className="flex justify-center gap-2 pt-8">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <button key={page} onClick={() => setBlogPage(page)}
-                  className={`px-4 py-2 rounded-xl font-bold transition-all ${blogPage === page ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}>
+                  className={`px-4 py-2 rounded-xl font-bold transition-all ${blogPage === page ? 'bg-brand-600 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}>
                   {page}
                 </button>
               ))}
