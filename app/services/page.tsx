@@ -1,6 +1,6 @@
 'use client';
 import React,{useState} from 'react';
-import {Users,Sparkles,Shield,Medal,Globe,User,ArrowUpRight,ChevronUp} from '@/components/Icons';
+import {Users,Sparkles,Shield,Medal,Globe,User,ArrowUpRight,ChevronUp,CheckCircle} from '@/components/Icons';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import FAQSection from '@/components/FAQSection';
@@ -23,14 +23,21 @@ return(
 <Navigation onOpenModal={()=>setIsModalOpen(true)}/>
 {showScrollTop&&<button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} className='fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50'><ChevronUp className='w-5 h-5'/></button>}
 
-<section className='section-padding bg-white border-b border-gray-100'>
-<div className='container-width text-center'>
-<div className='inline-block px-4 py-1.5 bg-brand-50 border border-brand-200 text-brand-600 text-xs font-semibold uppercase tracking-widest rounded-full mb-5'>Full Treatment Menu</div>
-<h1 className='text-3xl md:text-5xl font-display font-bold text-gray-900 mb-5'>Dental Implant Treatments <span className='text-brand-600'>Across the UK</span></h1>
-<p className='text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed'>Whether you need to replace a single missing tooth or restore an entire arch, our specialist network covers every form of implant dentistry. Each treatment is carried out by independently vetted consultants with a minimum of 100 successful placements per year — not a general dentist moonlighting in implants.</p>
-</div>
+{/* HERO */}
+<section className="relative bg-gray-900 text-white overflow-hidden min-h-[420px] flex items-end pb-16 pt-32">
+  <div className="absolute inset-0 z-0">
+    <img src="https://images.pexels.com/photos/4687905/pexels-photo-4687905.jpeg" className="w-full h-full object-cover" alt="Dental Implant Services" />
+    <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-gray-900/30"></div>
+  </div>
+  <div className="relative z-10 container-width w-full">
+    <div className="inline-block px-4 py-1.5 bg-white/10 border border-white/20 text-white/90 text-xs font-semibold uppercase tracking-widest rounded-full mb-5 backdrop-blur-sm">Full Treatment Menu</div>
+    <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 leading-tight">Dental Implant Treatments <span className="text-blue-400">Across the UK</span></h1>
+    <p className="text-lg text-white/80 max-w-2xl leading-relaxed mb-6">Every form of implant dentistry, delivered by independently vetted consultants with a minimum of 100 successful placements per year.</p>
+    <button onClick={()=>setIsModalOpen(true)} className="btn-primary text-lg !px-8 !py-4">Find My Specialist</button>
+  </div>
 </section>
 
+{/* SERVICES GRID */}
 <section className="section-padding bg-gray-50">
 <div className="container-width">
 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -46,6 +53,7 @@ return(
 </div>
 </section>
 
+{/* WHY IMPLANTS + COMPARISON TABLE */}
 <section className="section-padding bg-white">
 <div className="container-width">
 <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -57,14 +65,46 @@ return(
 <p>The Essex Dental Implants network sources only consultants working with premium implant systems including Nobel Biocare, Straumann, and Osstem, and who invest in in-house 3D CBCT imaging for precise placement. If a case requires a bone graft or sinus lift, our providers manage the full care pathway in-house.</p>
 </div>
 </div>
+
 <div>
 <h3 className="text-xl font-display font-bold text-gray-900 mb-5">Choosing the Right Treatment</h3>
-<div className="space-y-3"></div>
+<div className="rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+  <table className="w-full text-sm">
+    <thead>
+      <tr className="bg-gray-50 border-b border-gray-100">
+        <th className="text-left px-5 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wider">Factor</th>
+        <th className="text-center px-4 py-3 text-brand-600 font-bold text-xs uppercase tracking-wider">Implants</th>
+        <th className="text-center px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wider">Dentures</th>
+        <th className="text-center px-4 py-3 text-gray-500 font-semibold text-xs uppercase tracking-wider">Bridges</th>
+      </tr>
+    </thead>
+    <tbody>
+      {[
+        {factor:'Longevity', implant:'20–30+ yrs', denture:'5–8 yrs', bridge:'10–15 yrs'},
+        {factor:'Bone preservation', implant:'✓ Yes', denture:'✗ No', bridge:'✗ No'},
+        {factor:'Adjacent teeth affected', implant:'✓ None', denture:'✓ None', bridge:'✗ Drilled'},
+        {factor:'Removable', implant:'✓ Fixed', denture:'✗ Removable', bridge:'✓ Fixed'},
+        {factor:'Eating restriction', implant:'✓ None', denture:'✗ Many', bridge:'Minimal'},
+        {factor:'Looks natural', implant:'✓ Yes', denture:'Partial', bridge:'✓ Yes'},
+        {factor:'Cost (per tooth/yr)', implant:'Lowest', denture:'Medium', bridge:'Medium'},
+      ].map((row,i)=>(
+        <tr key={i} className={i%2===0?'bg-white':'bg-gray-50/50'}>
+          <td className="px-5 py-3 text-gray-700 font-medium">{row.factor}</td>
+          <td className="px-4 py-3 text-center text-brand-600 font-semibold">{row.implant}</td>
+          <td className="px-4 py-3 text-center text-gray-500">{row.denture}</td>
+          <td className="px-4 py-3 text-center text-gray-500">{row.bridge}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<button onClick={()=>setIsModalOpen(true)} className="btn-primary w-full !py-3 mt-5">Get Matched with a Specialist</button>
 </div>
 </div>
 </div>
 </section>
 
+{/* PROCESS */}
 <section className="section-padding bg-gray-50">
 <div className="container-width">
 <div className="text-center mb-10">
@@ -84,6 +124,7 @@ return(
 </div>
 </section>
 
+{/* TRUST BAR */}
 <section className="py-16 bg-gray-900">
 <div className="container-width">
 <div className="grid md:grid-cols-3 gap-10 text-center mb-10">
