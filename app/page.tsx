@@ -65,44 +65,44 @@ export default function Home() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <div className="min-h-screen bg-white text-slate-700">
+    <div className="min-h-screen bg-white">
       <LeadFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Navigation onOpenModal={() => setIsModalOpen(true)} />
       
       <button 
         onClick={scrollToTop} 
-        className={`fixed bottom-6 left-6 z-[70] w-12 h-12 bg-slate-100 border border-slate-200 text-slate-500 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed bottom-6 left-6 z-[70] w-10 h-10 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       >
         <ChevronUp className="w-6 h-6" />
       </button>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-4">
+      <section className="relative bg-gray-900 text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.pexels.com/photos/4687905/pexels-photo-4687905.jpeg" 
             className="w-full h-full object-cover animate-slow-zoom" 
             alt="Dental Implants UK" 
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/40 to-slate-900/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 via-gray-900/50 to-gray-900/20"></div>
         </div>
-        <div className="max-w-5xl mx-auto relative z-10 text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/90 text-sm font-bold backdrop-blur-sm">
+        <div className="relative container-width py-24 md:py-32">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/90 text-sm font-medium backdrop-blur-sm">
             <Sparkles className="w-4 h-4" />
             <span>Premium Dental Implant Specialists</span>
           </div>
-          <h1 className="font-display text-4xl sm:text-6xl lg:text-8xl font-black text-white leading-tight drop-shadow-lg">
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-8xl font-bold text-white leading-tight drop-shadow-sm">
             The Network For <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-400 to-blue-400 animate-gradient">
               Dental Implants In Essex.
             </span>
           </h1>
-          <p className="text-lg lg:text-2xl text-white/80 max-w-3xl mx-auto font-medium">
+          <p className="text-xl text-gray-200 mb-8 leading-relaxed">
             Connecting patients with elite dental implant specialists for natural-looking, long-lasting tooth replacement solutions.
           </p>
           <button 
             onClick={() => setIsModalOpen(true)} 
-            className="pulse-glow px-12 py-6 bg-blue-500 text-white text-xl font-bold rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all"
+            className="btn-primary text-xl !px-10 !py-5"
           >
             Find My Specialist
           </button>
@@ -110,8 +110,8 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <div className="bg-slate-50 border-y border-slate-200 py-12">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div className="py-10 bg-white border-b border-gray-100">
+        <div className="container-width grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { val: 350, suffix: '+', label: 'Verified Partners' },
             { val: 12, suffix: 'k+', label: 'Matches' },
@@ -119,21 +119,21 @@ export default function Home() {
             { val: 0, suffix: 'Free', label: 'Service', special: true }
           ].map((s, i) => (
             <div key={i}>
-              <p className="text-3xl font-black text-slate-900">
+              <p className="text-3xl font-display font-bold text-gray-900">
                 {s.special ? 'FREE' : <CountUp end={s.val} suffix={s.suffix} decimals={s.decimals || 0} />}
               </p>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{s.label}</p>
+              <p className="text-xs text-gray-500">{s.label}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Why Choose Dental Implants Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="section-padding bg-white">
+        <div className="container-width">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900">Why Choose Dental Implants?</h2>
-            <p className="text-slate-500 text-lg max-w-3xl mx-auto font-medium">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900">Why Choose Dental Implants?</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               The gold standard for tooth replacement. Permanent, natural-looking, and designed to last a lifetime.
             </p>
           </div>
@@ -170,12 +170,12 @@ export default function Home() {
                 desc: 'Smile, laugh, and speak without worrying about gaps, loose dentures, or damaged teeth. Feel truly confident again.'
               }
             ].map((item, i) => (
-              <div key={i} className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all">
-                <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-500 mb-6">
+              <div key={i} className="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all">
+                <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-4">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-black text-slate-900 mb-3">{item.title}</h3>
-                <p className="text-slate-500 font-medium">{item.desc}</p>
+                <h3 className="font-display font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -183,11 +183,11 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="section-padding bg-gray-50">
+        <div className="container-width">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900">How It Works</h2>
-            <p className="text-slate-500 text-lg max-w-3xl mx-auto font-medium">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900">How It Works</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Three simple steps to your perfect smile. We make finding the right specialist effortless.
             </p>
           </div>
@@ -215,15 +215,15 @@ export default function Home() {
                 color: 'text-blue-500'
               }
             ].map((s, i) => (
-              <div key={i} className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all">
+              <div key={i} className="bg-white p-10 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all">
                 <div className="flex justify-between items-start mb-10">
-                  <div className={`w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center ${s.color}`}>
+                  <div className={`w-16 h-16 rounded-2xl bg-brand-50 flex items-center justify-center ${s.color}`}>
                     {s.icon}
                   </div>
-                  <span className="text-5xl font-black text-slate-100">{s.num}</span>
+                  <span className="text-5xl font-display font-bold text-gray-100">{s.num}</span>
                 </div>
-                <h3 className="text-2xl font-black text-slate-900 mb-4">{s.title}</h3>
-                <p className="text-slate-500 font-medium">{s.desc}</p>
+                <h3 className="text-xl font-display font-bold text-gray-900 mb-4">{s.title}</h3>
+                <p className="text-gray-600">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -231,11 +231,11 @@ export default function Home() {
       </section>
 
       {/* Conditions We Treat Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="section-padding bg-white">
+        <div className="container-width">
           <div className="text-center mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900">When You Need Dental Implants</h2>
-            <p className="text-slate-500 text-lg max-w-3xl mx-auto font-medium">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900">When You Need Dental Implants</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               From single tooth replacement to full arch restoration, our specialists handle every case with precision and care.
             </p>
           </div>
@@ -274,9 +274,9 @@ export default function Home() {
                 desc: 'Replace teeth that never developed with permanent implant solutions for complete smile restoration.'
               }
             ].map((condition, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:border-blue-300 hover:shadow-md transition-all">
-                <h3 className="text-lg font-black text-slate-900 mb-2">{condition.title}</h3>
-                <p className="text-slate-500 text-sm font-medium leading-relaxed">{condition.desc}</p>
+              <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all">
+                <h3 className="font-display font-bold text-gray-900 mb-2">{condition.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{condition.desc}</p>
               </div>
             ))}
           </div>
@@ -284,17 +284,17 @@ export default function Home() {
       </section>
 
       {/* The Specialist Difference Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="section-padding bg-gray-50">
+        <div className="container-width">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <div className="inline-block px-4 py-2 bg-blue-50 border border-blue-200 text-blue-600 text-xs font-black uppercase tracking-widest rounded-full">
+              <div className="inline-block px-4 py-1.5 bg-brand-50 border border-brand-200 text-brand-600 text-xs font-semibold uppercase tracking-widest rounded-full">
                 Elite Specialist Network
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
-                The <span className="text-blue-500">Specialist</span> Difference
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 leading-tight">
+                The <span className="text-brand-600">Specialist</span> Difference
               </h2>
-              <p className="text-slate-500 text-lg font-medium leading-relaxed">
+              <p className="text-gray-600 text-lg leading-relaxed">
                 Not all dentists place implants. Our network consists exclusively of verified specialists with advanced training and extensive experience.
               </p>
               <div className="space-y-4 pt-4">
@@ -306,20 +306,20 @@ export default function Home() {
                   'Continuous education on latest implant systems and techniques'
                 ].map((point, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-slate-600 font-medium">{point}</p>
+                    <CheckCircle className="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" />
+                    <p className="text-gray-600">{point}</p>
                   </div>
                 ))}
               </div>
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="mt-8 px-10 py-4 bg-blue-500 text-white font-bold rounded-full shadow-xl hover:scale-105 transition-all"
+                className="btn-primary text-lg !px-8 !py-4"
               >
                 Find Your Specialist
               </button>
             </div>
             <div className="relative">
-              <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-lg">
+              <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm">
                 <img 
                   src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop"
                   alt="Dental Implant Specialist"
@@ -330,8 +330,8 @@ export default function Home() {
                 <div className="flex items-center gap-3 mb-2">
                   <Medal className="w-8 h-8 text-blue-500" />
                   <div>
-                    <p className="text-2xl font-black text-slate-900">350+</p>
-                    <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Vetted Specialists</p>
+                    <p className="text-xl font-display font-bold text-gray-900">350+</p>
+                    <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">Vetted Specialists</p>
                   </div>
                 </div>
               </div>
@@ -344,12 +344,12 @@ export default function Home() {
       <FAQSection faqs={FAQS_HOME} />
 
       {/* Final CTA Section */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-8">
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight">
+      <section className="py-24 bg-gray-900 relative overflow-hidden">
+        <div className="container-width text-center relative z-10">
+          <h2 className="text-4xl font-display font-bold text-white">
             Ready for Your Permanent Smile?
           </h2>
-          <p className="text-xl text-slate-500 font-medium max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Connect with a verified dental implant specialist in your area. Free consultation, expert care, and results that last a lifetime.
           </p>
           <button 
@@ -358,7 +358,7 @@ export default function Home() {
           >
             Get Matched with a Specialist
           </button>
-          <p className="text-sm text-slate-400 font-medium">
+          <p className="text-sm text-gray-400">
             No cost to use our service • Verified specialists only • Free consultation matching
           </p>
         </div>
