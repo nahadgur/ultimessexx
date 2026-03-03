@@ -175,11 +175,11 @@ export default function ArticlePage() {
 
   if (!article) {
     return (
-      <div className="min-h-screen bg-white text-slate-700">
+      <div className="min-h-screen bg-white">
         <Navigation onOpenModal={() => setIsModalOpen(true)} />
         <div className="pt-32 px-6 max-w-5xl mx-auto">
-          <h1 className="text-3xl font-black text-slate-900">Article not found</h1>
-          <Link href="/blog" className="text-blue-500 underline mt-6 inline-block">Back to blog</Link>
+          <h1 className="text-3xl font-display font-bold text-gray-900">Article not found</h1>
+          <Link href="/blog" className="text-brand-600 underline mt-6 inline-block">Back to blog</Link>
         </div>
         <Footer />
       </div>
@@ -188,55 +188,55 @@ export default function ArticlePage() {
 
   const articleClasses = [
     'p-10 max-w-none',
-    '[&_h1]:font-display [&_h1]:text-4xl [&_h1]:md:text-5xl [&_h1]:font-black [&_h1]:tracking-tight [&_h1]:text-slate-900 [&_h1]:mt-10 [&_h1]:mb-5',
-    '[&_h2]:font-display [&_h2]:text-3xl [&_h2]:md:text-4xl [&_h2]:font-black [&_h2]:tracking-tight [&_h2]:text-slate-900 [&_h2]:mt-10 [&_h2]:mb-4',
-    '[&_h3]:text-2xl [&_h3]:md:text-3xl [&_h3]:font-black [&_h3]:tracking-tight [&_h3]:text-slate-900 [&_h3]:mt-8 [&_h3]:mb-3',
-    '[&_h4]:text-xl [&_h4]:font-black [&_h4]:text-slate-900 [&_h4]:mt-7 [&_h4]:mb-3',
-    '[&_p]:text-slate-600 [&_p]:font-medium [&_p]:leading-relaxed [&_p]:mb-5',
-    '[&_a]:text-blue-500 [&_a]:font-black [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-blue-600',
-    '[&_ul]:my-6 [&_ul]:pl-7 [&_ul]:list-disc [&_ul]:list-outside [&_ul]:space-y-3 [&_ul]:text-slate-600 [&_ul]:font-medium',
-    '[&_ol]:my-6 [&_ol]:pl-7 [&_ol]:list-decimal [&_ol]:list-outside [&_ol]:space-y-3 [&_ol]:text-slate-600 [&_ol]:font-medium',
-    '[&_li]:leading-relaxed [&_li]:pl-1 [&_li]:marker:text-blue-500',
-    '[&_blockquote]:my-8 [&_blockquote]:rounded-3xl [&_blockquote]:border [&_blockquote]:border-slate-200 [&_blockquote]:bg-slate-50 [&_blockquote]:p-6 [&_blockquote]:text-slate-700 [&_blockquote]:font-medium',
+    '[&_h1]:font-display [&_h1]:text-4xl [&_h1]:md:text-5xl [&_h1]:font-bold [&_h1]:tracking-tight [&_h1]:text-gray-900 [&_h1]:mt-10 [&_h1]:mb-5',
+    '[&_h2]:font-display [&_h2]:text-3xl [&_h2]:md:text-4xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-gray-900 [&_h2]:mt-10 [&_h2]:mb-4',
+    '[&_h3]:text-2xl [&_h3]:md:text-3xl [&_h3]:font-bold [&_h3]:tracking-tight [&_h3]:text-gray-900 [&_h3]:mt-8 [&_h3]:mb-3',
+    '[&_h4]:text-xl [&_h4]:font-bold [&_h4]:text-gray-900 [&_h4]:mt-7 [&_h4]:mb-3',
+    '[&_p]:text-gray-600 [&_p]:font-medium [&_p]:leading-relaxed [&_p]:mb-5',
+    '[&_a]:text-brand-600 [&_a]:font-bold [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-blue-600',
+    '[&_ul]:my-6 [&_ul]:pl-7 [&_ul]:list-disc [&_ul]:list-outside [&_ul]:space-y-3 [&_ul]:text-gray-600 [&_ul]:font-medium',
+    '[&_ol]:my-6 [&_ol]:pl-7 [&_ol]:list-decimal [&_ol]:list-outside [&_ol]:space-y-3 [&_ol]:text-gray-600 [&_ol]:font-medium',
+    '[&_li]:leading-relaxed [&_li]:pl-1 [&_li]:marker:text-brand-600',
+    '[&_blockquote]:my-8 [&_blockquote]:rounded-3xl [&_blockquote]:border [&_blockquote]:border-gray-200 [&_blockquote]:bg-gray-50 [&_blockquote]:p-6 [&_blockquote]:text-gray-700 [&_blockquote]:font-medium',
     '[&_blockquote_p]:mb-0',
-    '[&_hr]:my-10 [&_hr]:border-slate-200',
-    '[&_img]:w-full [&_img]:h-auto [&_img]:rounded-3xl [&_img]:border [&_img]:border-slate-200 [&_img]:shadow-lg [&_img]:my-8',
-    '[&_table]:w-full [&_table]:my-10 [&_table]:overflow-hidden [&_table]:rounded-3xl [&_table]:border [&_table]:border-slate-200 [&_table]:bg-white [&_table]:shadow-lg',
-    '[&_thead]:bg-slate-50',
-    '[&_th]:text-left [&_th]:px-5 [&_th]:py-4 [&_th]:text-slate-900 [&_th]:text-sm [&_th]:font-black [&_th]:tracking-wide',
-    '[&_td]:px-5 [&_td]:py-4 [&_td]:text-slate-600 [&_td]:text-sm [&_td]:font-medium [&_td]:border-t [&_td]:border-slate-200',
-    'hover:[&_tbody_tr]:bg-slate-50',
-    '[&_code]:px-2 [&_code]:py-1 [&_code]:rounded-lg [&_code]:bg-slate-100 [&_code]:text-slate-800 [&_code]:text-[0.95em]',
-    '[&_pre]:my-8 [&_pre]:p-6 [&_pre]:rounded-3xl [&_pre]:bg-slate-50 [&_pre]:border [&_pre]:border-slate-200 [&_pre]:overflow-x-auto',
+    '[&_hr]:my-10 [&_hr]:border-gray-200',
+    '[&_img]:w-full [&_img]:h-auto [&_img]:rounded-3xl [&_img]:border [&_img]:border-gray-200 [&_img]:shadow-lg [&_img]:my-8',
+    '[&_table]:w-full [&_table]:my-10 [&_table]:overflow-hidden [&_table]:rounded-3xl [&_table]:border [&_table]:border-gray-200 [&_table]:bg-white [&_table]:shadow-lg',
+    '[&_thead]:bg-gray-50',
+    '[&_th]:text-left [&_th]:px-5 [&_th]:py-4 [&_th]:text-gray-900 [&_th]:text-sm [&_th]:font-bold [&_th]:tracking-wide',
+    '[&_td]:px-5 [&_td]:py-4 [&_td]:text-gray-600 [&_td]:text-sm [&_td]:font-medium [&_td]:border-t [&_td]:border-gray-200',
+    'hover:[&_tbody_tr]:bg-gray-50',
+    '[&_code]:px-2 [&_code]:py-1 [&_code]:rounded-lg [&_code]:bg-gray-100 [&_code]:text-gray-800 [&_code]:text-[0.95em]',
+    '[&_pre]:my-8 [&_pre]:p-6 [&_pre]:rounded-3xl [&_pre]:bg-gray-50 [&_pre]:border [&_pre]:border-gray-200 [&_pre]:overflow-x-auto',
   ].join(' ');
 
   const [htmlBefore, htmlAfter] = splitHtmlAfterFirstH2Section(article.cleanedHtml || '');
 
   return (
-    <div className="min-h-screen bg-white text-slate-700">
+    <div className="min-h-screen bg-white">
       <LeadFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Navigation onOpenModal={() => setIsModalOpen(true)} />
 
       {showScrollTop && (
         <button onClick={scrollToTop}
-          className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-slate-100 border border-slate-200 shadow-lg flex items-center justify-center text-slate-500">
+          className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-gray-100 border border-gray-200 shadow-lg flex items-center justify-center text-gray-600">
           <ChevronUp />
         </button>
       )}
 
       <div className="pt-32 pb-24 px-6 max-w-5xl mx-auto">
-        <Link href="/blog" className="text-blue-500 uppercase text-xs font-black">← Back to blog</Link>
+        <Link href="/blog" className="text-brand-600 uppercase text-xs font-black">← Back to blog</Link>
 
-        <div className="mt-10 rounded-[2.5rem] overflow-hidden border border-slate-200 shadow-lg bg-white">
+        <div className="mt-10 rounded-2xl overflow-hidden border border-gray-200 shadow-lg bg-white">
           <div className="relative h-[420px] md:h-[520px]">
             {article.featuredImage && (
               <img src={article.featuredImage} alt={article['Article Title']}
                 className="absolute inset-0 w-full h-full object-cover" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent" />
             <div className="absolute bottom-8 left-8 right-8">
               <div className="text-sm text-white/60">{article.publishDate.toDateString()}</div>
-              <h1 className="font-display text-4xl md:text-5xl font-black text-white drop-shadow-lg">{article['Article Title']}</h1>
+              <h1 className="font-display text-4xl md:text-5xl font-display font-bold text-white drop-shadow-lg">{article['Article Title']}</h1>
             </div>
           </div>
 
@@ -255,12 +255,12 @@ export default function ArticlePage() {
 
         {relatedArticles.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-2xl font-black text-slate-900">Related articles</h2>
+            <h2 className="text-2xl font-display font-bold text-gray-900">Related articles</h2>
             <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {relatedArticles.map((a) => (
                 <Link key={a.Slug} href={`/blog/${a.Slug}`}
-                  className="group rounded-[2.5rem] border border-slate-200 overflow-hidden flex flex-col hover:border-blue-300 transition-all duration-500 shadow-sm hover:shadow-lg bg-white">
-                  <div className="relative h-44 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-50">
+                  className="group rounded-2xl border border-gray-200 overflow-hidden flex flex-col hover:border-brand-200 transition-all duration-500 shadow-sm hover:shadow-lg bg-white">
+                  <div className="relative h-44 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
                     {a.featuredImage ? (
                       <img src={a.featuredImage} alt={a['Article Title']}
                         className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500" loading="lazy" />
@@ -268,15 +268,15 @@ export default function ArticlePage() {
                       <div className="absolute inset-0 flex items-center justify-center"><div className="text-6xl opacity-10">📝</div></div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/10 to-transparent" />
-                    <div className="absolute top-5 left-5 px-4 py-1.5 bg-blue-500 text-white text-[10px] font-black uppercase rounded-full">
+                    <div className="absolute top-5 left-5 px-4 py-1.5 bg-brand-500 text-white text-[10px] font-bold uppercase rounded-full">
                       {a.wp_category}
                     </div>
                   </div>
                   <div className="p-8 flex-1 flex flex-col">
-                    <h3 className="text-xl font-black text-slate-900 mb-4 group-hover:text-blue-500 transition-colors">
+                    <h3 className="text-xl font-display font-bold text-gray-900 mb-4 group-hover:text-brand-600 transition-colors">
                       {a['Article Title']}
                     </h3>
-                    <div className="flex items-center gap-2 text-blue-500 font-black uppercase tracking-widest text-[10px] mt-auto">
+                    <div className="flex items-center gap-2 text-brand-600 font-medium text-sm mt-auto">
                       Read Article <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -288,12 +288,12 @@ export default function ArticlePage() {
 
         {furtherReading.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-2xl font-black text-slate-900">Further Reading</h2>
+            <h2 className="text-2xl font-display font-bold text-gray-900">Further Reading</h2>
             <ul className="mt-6 space-y-3">
               {furtherReading.map((l) => (
                 <li key={l.url}>
                   <a href={l.url} target="_blank" rel="noopener noreferrer"
-                    className="text-blue-500 underline underline-offset-4 hover:text-blue-600">{l.label}</a>
+                    className="text-brand-600 underline underline-offset-4 hover:text-brand-700">{l.label}</a>
                 </li>
               ))}
             </ul>
