@@ -64,7 +64,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-slate-50 pt-20 pb-10 border-t border-slate-200">
+    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Top row: Brand + columns */}
@@ -72,25 +72,25 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 text-slate-900 mb-5">
-              <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center font-black text-white text-sm">ID</div>
-              <span className="text-xl font-black">Essex Dental Implants</span>
+            <div className="flex items-center gap-3 text-white mb-4">
+              <div className="w-8 h-8 bg-brand-600 rounded-md flex items-center justify-center text-white font-bold text-sm">ID</div>
+              <span className="font-display font-bold text-lg text-white">Essex Dental Implants</span>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed mb-5">
+            <p className="text-sm text-gray-400 leading-relaxed mb-4">
               Independent referral network connecting patients with verified dental implant specialists across Essex and the wider UK. Free matching service — no obligation.
             </p>
-            <p className="text-xs text-slate-300 font-medium">
+            <p className="text-xs text-gray-500 italic border-l-2 border-gray-700 pl-3">
               Trusted by 12,000+ patients since 2020
             </p>
           </div>
 
           {/* Treatments */}
           <div>
-            <h4 className="text-slate-900 font-bold mb-5 uppercase tracking-widest text-[10px]">Treatments</h4>
+            <h4 className="text-white font-semibold mb-4">Treatments</h4>
             <ul className="space-y-3">
               {SERVICES.map((service) => (
                 <li key={service.id}>
-                  <Link href={`/services/${service.id}`} className="text-sm text-slate-400 hover:text-blue-500 transition-colors">
+                  <Link href={`/services/${service.id}`} className="text-sm hover:text-brand-400 transition-colors">
                     {service.title}
                   </Link>
                 </li>
@@ -100,13 +100,13 @@ export default function Footer() {
 
           {/* Top Locations */}
           <div>
-            <h4 className="text-slate-900 font-bold mb-5 uppercase tracking-widest text-[10px]">Popular Locations</h4>
+            <h4 className="text-white font-semibold mb-4">Popular Locations</h4>
             <ul className="space-y-3">
               {topCities.map((city) => {
                 const slug = city.toLowerCase().replace(/\s+/g, '-');
                 return (
                   <li key={city}>
-                    <Link href={`/location/${slug}`} className="text-sm text-slate-400 hover:text-blue-500 transition-colors">
+                    <Link href={`/location/${slug}`} className="text-sm hover:text-brand-400 transition-colors">
                       Dental Implants in {city}
                     </Link>
                   </li>
@@ -117,19 +117,19 @@ export default function Footer() {
 
           {/* Resources + Latest Articles */}
           <div>
-            <h4 className="text-slate-900 font-bold mb-5 uppercase tracking-widest text-[10px]">Resources</h4>
+            <h4 className="text-white font-semibold mb-4">Resources</h4>
             <ul className="space-y-3">
-              <li><Link href="/blog" className="text-sm text-slate-400 hover:text-blue-500 transition-colors">Blog & Guides</Link></li>
-              <li><Link href="/services" className="text-sm text-slate-400 hover:text-blue-500 transition-colors">All Treatments</Link></li>
-              <li><Link href="/location" className="text-sm text-slate-400 hover:text-blue-500 transition-colors">All Locations</Link></li>
-              <li><Link href="/#faq" className="text-sm text-slate-400 hover:text-blue-500 transition-colors">FAQ</Link></li>
+              <li><Link href="/blog" className="text-sm hover:text-brand-400 transition-colors">Blog & Guides</Link></li>
+              <li><Link href="/services" className="text-sm hover:text-brand-400 transition-colors">All Treatments</Link></li>
+              <li><Link href="/location" className="text-sm hover:text-brand-400 transition-colors">All Locations</Link></li>
+              <li><Link href="/#faq" className="text-sm hover:text-brand-400 transition-colors">FAQ</Link></li>
             </ul>
 
             <h4 className="text-slate-900 font-bold mt-8 mb-5 uppercase tracking-widest text-[10px]">Latest Articles</h4>
             <ul className="space-y-3">
               {latestArticles.map((article) => (
                 <li key={article.slug}>
-                  <Link href={`/blog/${article.slug}`} className="text-sm text-slate-400 hover:text-blue-500 transition-colors line-clamp-2 leading-snug">
+                  <Link href={`/blog/${article.slug}`} className="text-sm hover:text-brand-400 transition-colors line-clamp-2 leading-snug">
                     {article.title}
                   </Link>
                 </li>
@@ -139,13 +139,13 @@ export default function Footer() {
         </div>
 
         {/* SEO-rich location links bar */}
-        <div className="border-t border-slate-200 pt-8 mb-8">
-          <h4 className="text-slate-900 font-bold mb-4 uppercase tracking-widest text-[10px]">Dental Implants Near You</h4>
+        <div className="border-t border-gray-800 pt-8 mb-8">
+          <h4 className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-4">Dental Implants Near You</h4>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             {allCities.map((city) => {
               const slug = city.toLowerCase().replace(/\s+/g, '-');
               return (
-                <Link key={city} href={`/location/${slug}`} className="text-xs text-slate-300 hover:text-blue-500 transition-colors">
+                <Link key={city} href={`/location/${slug}`} className="text-xs text-gray-500 hover:text-brand-400 transition-colors">
                   {city}
                 </Link>
               );
@@ -154,14 +154,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-slate-200 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] uppercase font-black tracking-widest text-slate-300">
+        <div className="border-t border-gray-800 pt-8 text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm">
             © {new Date().getFullYear()} Essex Dental Implants. Independent referral facilitator — not a dental provider.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/" className="text-[10px] uppercase font-bold tracking-widest text-slate-300 hover:text-blue-500 transition-colors">Privacy Policy</Link>
-            <Link href="/" className="text-[10px] uppercase font-bold tracking-widest text-slate-300 hover:text-blue-500 transition-colors">Terms</Link>
-            <Link href="/blog" className="text-[10px] uppercase font-bold tracking-widest text-slate-300 hover:text-blue-500 transition-colors">Sitemap</Link>
+            <Link href="/" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
+            <Link href="/" className="hover:text-gray-300 transition-colors">Terms</Link>
+            <Link href="/blog" className="hover:text-gray-300 transition-colors">Sitemap</Link>
           </div>
         </div>
 
