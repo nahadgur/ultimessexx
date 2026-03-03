@@ -57,7 +57,7 @@ export default function ServiceCitiesPage({ params }: { params: { service: strin
   const allCities = Object.values(LOCATIONS).flat();
 
   return (
-    <div className="min-h-screen bg-white text-slate-700">
+    <div className="min-h-screen bg-white">
       <LeadFormModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -67,7 +67,7 @@ export default function ServiceCitiesPage({ params }: { params: { service: strin
 
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-6 left-6 z-[70] w-12 h-12 bg-slate-100 border border-slate-200 text-slate-500 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${
+        className={`fixed bottom-6 left-6 z-[70] w-10 h-10 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${
           showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -82,10 +82,10 @@ export default function ServiceCitiesPage({ params }: { params: { service: strin
             alt={service.title}
             className="w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/40 to-slate-900/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/40 to-gray-900/90" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 space-y-12">
+        <div className="relative z-10 container-width space-y-12">
           <div className="text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20 text-sm text-white/70 mb-4 backdrop-blur-sm">
               <Link
@@ -98,7 +98,7 @@ export default function ServiceCitiesPage({ params }: { params: { service: strin
               <span className="text-white">{service.title}</span>
             </div>
 
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight px-4 overflow-visible drop-shadow-lg">
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight tracking-tight px-4 overflow-visible drop-shadow-lg">
               {service.title} in{' '}
               <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-400 inline-block pr-2">
                 {allCities.length}+ UK Locations
@@ -121,7 +121,7 @@ export default function ServiceCitiesPage({ params }: { params: { service: strin
             </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-md p-8 md:p-12 rounded-[2.5rem] border border-white/20 shadow-lg">
+          <div className="bg-white/10 backdrop-blur-md p-8 md:p-12 rounded-2xl border border-white/20 shadow-lg">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="space-y-4 text-center md:text-left">
                 <h2 className="text-3xl font-bold text-white">
@@ -135,7 +135,7 @@ export default function ServiceCitiesPage({ params }: { params: { service: strin
 
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="px-10 py-5 bg-blue-500 text-white font-black rounded-full shadow-2xl hover:scale-105 transition-all whitespace-nowrap"
+                className="px-10 py-5 bg-brand-500 text-white font-bold rounded-full shadow-2xl hover:scale-105 transition-all whitespace-nowrap"
               >
                 Get Matched
               </button>
@@ -146,11 +146,11 @@ export default function ServiceCitiesPage({ params }: { params: { service: strin
 
       {/* Cities */}
       <div className="pb-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="container-width">
           <div className="flex flex-col gap-16">
             {Object.entries(filteredLocations).map(([region, cities]) => (
               <div key={region}>
-                <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-6 px-2">
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-6 px-2">
                   {region}
                 </h2>
 
@@ -164,7 +164,7 @@ export default function ServiceCitiesPage({ params }: { params: { service: strin
                       <Link
                         key={city}
                         href={`/services/${params.service}/${citySlug}`}
-                        className="text-left px-6 py-5 rounded-2xl border transition-all font-bold text-base sm:text-lg leading-relaxed flex items-center justify-between group bg-slate-50 border-slate-100 text-slate-600 hover:border-blue-300 hover:text-slate-900 hover:bg-white hover:shadow-md"
+                        className="text-left px-6 py-5 rounded-2xl border transition-all font-semibold text-base flex items-center justify-between group bg-gray-50 border-gray-100 text-gray-600 hover:border-brand-200 hover:text-gray-900 hover:bg-white hover:shadow-md"
                       >
                         <span className="leading-snug">{city}</span>
                         <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
