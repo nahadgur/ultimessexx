@@ -84,17 +84,17 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md 
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-md 
         ${animationState === 'entering' ? 'animate-backdrop-in' : animationState === 'exiting' ? 'animate-backdrop-out' : 'opacity-100'}`}
       onClick={handleBackdropClick}
     >
       <div 
-        className={`relative w-full max-w-lg overflow-hidden bg-white rounded-[2.5rem] shadow-[0_48px_96px_-12px_rgba(0,0,0,0.25)] 
+        className={`relative w-full max-w-lg overflow-hidden bg-white rounded-2xl shadow-[0_48px_96px_-12px_rgba(0,0,0,0.25)] 
           ${animationState === 'entering' ? 'animate-modal-in' : 'animate-modal-out'}`}
       >
         <button 
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 text-slate-300 hover:text-slate-500 hover:bg-slate-50 rounded-full transition-all z-10"
+          className="absolute top-6 right-6 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-full transition-all z-10"
           aria-label="Close modal"
         >
           <X className="w-6 h-6" />
@@ -103,12 +103,12 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         <div className="p-8 md:p-12">
           {isSuccess ? (
             <div className="flex flex-col items-center text-center py-12 space-y-6">
-              <div className="w-24 h-24 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/10">
+              <div className="w-24 h-24 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/10">
                 <CheckCircle className="w-14 h-14" />
               </div>
               <div>
-                <h2 className="text-3xl font-black text-slate-900 mb-2">Request Received</h2>
-                <p className="text-slate-500 font-medium leading-relaxed">
+                <h2 className="text-3xl font-display font-bold text-gray-900 mb-2">Request Received</h2>
+                <p className="text-gray-500 leading-relaxed">
                   We've successfully matched you with a Platinum Partner in your area. Check your email for next steps.
                 </p>
               </div>
@@ -116,40 +116,40 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           ) : (
             <>
               <div className="mb-8">
-                <div className="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest rounded-full mb-3 shadow-sm shadow-blue-100">
+                <div className="inline-block px-3 py-1 bg-brand-50 text-brand-600 text-xs font-semibold uppercase tracking-widest rounded-full mb-3 shadow-sm shadow-blue-100">
                   Priority Referral
                 </div>
-                <h2 className="text-3xl font-black text-slate-900 leading-tight">Start Your Smile Journey</h2>
-                <p className="text-slate-500 mt-2 font-medium">
+                <h2 className="text-3xl font-display font-bold text-gray-900 leading-tight">Start Your Smile Journey</h2>
+                <p className="text-gray-500 mt-2 font-medium">
                   Complete the form to get matched with vetted Dental Implants specialists in your area.
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-1.5 group">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1 group-focus-within:text-blue-500 transition-colors">Full Name</label>
+                  <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-brand-600 transition-colors">Full Name</label>
                   <input 
                     required 
                     type="text" 
-                    className="w-full px-5 py-4 bg-white rounded-2xl border-2 border-slate-200 text-slate-700 focus:border-blue-400 focus:bg-white focus:ring-8 focus:ring-blue-400/5 outline-none transition-all placeholder:text-slate-300" 
+                    className="w-full px-5 py-4 bg-white rounded-2xl border border-gray-200 text-gray-700 focus:border-brand-400 focus:bg-white outline-none outline-none transition-all placeholder:text-gray-300" 
                     placeholder="E.g. Alexander Hamilton" 
                   />
                 </div>
                 <div className="space-y-1.5 group">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1 group-focus-within:text-blue-500 transition-colors">Email Address</label>
+                  <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-brand-600 transition-colors">Email Address</label>
                   <input 
                     required 
                     type="email" 
-                    className="w-full px-5 py-4 bg-white rounded-2xl border-2 border-slate-200 text-slate-700 focus:border-blue-400 focus:bg-white focus:ring-8 focus:ring-blue-400/5 outline-none transition-all placeholder:text-slate-300" 
+                    className="w-full px-5 py-4 bg-white rounded-2xl border border-gray-200 text-gray-700 focus:border-brand-400 focus:bg-white outline-none outline-none transition-all placeholder:text-gray-300" 
                     placeholder="alex@example.com" 
                   />
                 </div>
                 <div className="space-y-1.5 group">
-                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1 group-focus-within:text-blue-500 transition-colors">Your City / Location</label>
+                  <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider ml-1 group-focus-within:text-brand-600 transition-colors">Your City / Location</label>
                   <input 
                     required 
                     type="text" 
-                    className="w-full px-5 py-4 bg-white rounded-2xl border-2 border-slate-200 text-slate-700 focus:border-blue-400 focus:bg-white focus:ring-8 focus:ring-blue-400/5 outline-none transition-all placeholder:text-slate-300" 
+                    className="w-full px-5 py-4 bg-white rounded-2xl border border-gray-200 text-gray-700 focus:border-brand-400 focus:bg-white outline-none outline-none transition-all placeholder:text-gray-300" 
                     placeholder="e.g. Manchester, UK" 
                   />
                 </div>
@@ -157,7 +157,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 <button 
                   disabled={isSubmitting}
                   type="submit" 
-                  className="w-full py-5 mt-4 bg-blue-500 hover:bg-blue-600 text-white font-black text-lg rounded-2xl shadow-xl shadow-blue-500/20 transition-all active:scale-[0.98] flex items-center justify-center gap-3 relative overflow-hidden group/btn"
+                  className="w-full py-5 mt-4 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-base rounded-xl shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-3 relative overflow-hidden group/btn"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
                   {isSubmitting ? (
@@ -170,8 +170,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                   )}
                 </button>
                 <div className="flex items-center justify-center gap-2 mt-6">
-                  <div className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></div>
-                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                  <div className="w-1.5 h-1.5 bg-brand-600 rounded-full animate-pulse"></div>
+                  <p className="text-[10px] text-gray-400 text-xs uppercase tracking-widest">
                     facilitator service • free initial consultation
                   </p>
                 </div>
