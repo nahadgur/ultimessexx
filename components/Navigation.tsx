@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from './Icons';
+import { SERVICES } from '@/lib/data';
 
 interface NavigationProps {
   onOpenModal: () => void;
@@ -12,84 +13,90 @@ interface NavigationProps {
 
 export default function Navigation({ onOpenModal }: NavigationProps) {
   const pathname = usePathname();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const isHome = pathname === '/';
 
   return (
     <>
-      <nav className={`fixed top-0 w-full z-40 transition-all duration-300 ${scrolled || !isHome ? 'glass-effect py-3 shadow-md' : 'bg-slate-900/60 backdrop-blur-md py-6'}`}>
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-          
-          <Link href="/" className="flex items-center gap-3 cursor-pointer group">
-            <div className={`w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center transition-colors ${scrolled || !isHome ? 'bg-slate-50' : 'bg-white/10'}`}>
-              <Image
-                src="/logo.png"
-                alt="Essex Dental Implants"
-                width={40}
-                height={40}
-                priority
-                className="object-contain"
-              />
-            </div>
-            <span className={`text-2xl font-black tracking-tight transition-colors ${scrolled || !isHome ? 'text-slate-900' : 'text-white'}`}>
-              Essex Dental Implants
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className={`hidden md:flex items-center space-x-10 text-sm font-semibold transition-colors ${scrolled || !isHome ? 'text-slate-600' : 'text-white/80'}`}>
-            <Link href="/services" className={pathname === '/services' ? 'text-blue-400' : 'hover:text-blue-400'}>Services</Link>
-            <Link href="/location" className={pathname === '/location' ? 'text-blue-400' : 'hover:text-blue-400'}>Location</Link>
-            <Link href="/blog" className={pathname === '/blog' ? 'text-blue-400' : 'hover:text-blue-400'}>Blog</Link>
-            <button onClick={onOpenModal} className="px-7 py-2.5 bg-blue-500 text-white rounded-full font-bold shadow-lg shadow-blue-500/20">
-              Find a Specialist
-            </button>
-          </div>
-
-          {/* Mobile Button */}
-          <button 
-            onClick={() => setIsMobileMenuOpen(true)} 
-            className={`md:hidden p-2 rounded-xl transition-colors ${scrolled || !isHome ? 'bg-slate-100 text-slate-600' : 'bg-white/10 text-white'}`}
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      <div 
-        className={`fixed inset-0 z-[60] bg-slate-900/30 backdrop-blur-sm transition-opacity duration-500 md:hidden ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} 
-        onClick={() => setIsMobileMenuOpen(false)}
-      >
-        <div 
-          className={`absolute top-0 right-0 h-full w-[65%] bg-white border-l border-slate-200 p-6 pt-20 flex flex-col space-y-4 transition-transform duration-500 shadow-2xl ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`} 
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-left px-4 py-3 font-bold text-slate-700">Home</Link>
-          <Link href="/services" onClick={() => setIsMobileMenuOpen(false)} className="text-left px-4 py-3 font-bold text-slate-700">Services</Link>
-          <Link href="/location" onClick={() => setIsMobileMenuOpen(false)} className="text-left px-4 py-3 font-bold text-slate-700">Location</Link>
-          <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-left px-4 py-3 font-bold text-slate-700">Blog</Link>
-          <button 
-            onClick={() => { 
-              onOpenModal(); 
-              setIsMobileMenuOpen(false); 
-            }} 
-            className="text-left px-4 py-3 font-bold text-blue-500"
-          >
-            Find a Specialist
+      {/* Top Bar */}
+      <div className="bg-brand-900 text-brand-50 py-2 px-4 text-sm hidden md:block">
+        <div className="container-width flex justify-between items-center">
+          <span>Essex Dental Implants &mdash; Independent Specialist Network</span>
+          <button onClick={onOpenModal} className="hover:text-white transition-colors font-semibold">
+            Free Consultation &rarr;
           </button>
         </div>
       </div>
+
+      {/* Main Header */}
+      <header className={`sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b transition-shadow duration-200 ${scrolled ? 'shadow-md border-gray-200' : 'shadow-sm border-gray-100'}`}>
+        <div className="container-width">
+          <div className="flex justify-between items-center h-20">
+
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="w-10 h-10 overflow-hidden rounded-lg">
+                <Image src="/logo.png" alt="Essex Dental Implants" width={40} height={40} priority className="object-contain" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-xl leading-none text-gray-900">Essex Dental</span>
+                <span className="text-xs text-brand-600 font-semibold tracking-widest uppercase">Implants</span>
+              </div>
+            </Link>
+
+            <nav className="hidden lg:flex items-center gap-1">
+              <Link href="/" className="px-3 py-2 text-gray-600 hover:text-brand-600 font-medium transition-colors rounded-lg hover:bg-brand-50">Home</Link>
+              <div className="relative group">
+                <Link href="/services" className="flex items-center gap-1 px-3 py-2 text-gray-600 group-hover:text-brand-600 font-medium transition-colors rounded-lg group-hover:bg-brand-50">
+                  Services
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                </Link>
+                <div className="absolute top-full left-0 w-72 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all translate-y-2 group-hover:translate-y-0 p-2 z-50">
+                  {SERVICES.map(s => (
+                    <Link key={s.id} href={`/services/${s.id}`} className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-brand-50 hover:text-brand-700 rounded-lg transition-colors">
+                      {s.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <Link href="/location" className="px-3 py-2 text-gray-600 hover:text-brand-600 font-medium transition-colors rounded-lg hover:bg-brand-50">Locations</Link>
+              <Link href="/blog" className="px-3 py-2 text-gray-600 hover:text-brand-600 font-medium transition-colors rounded-lg hover:bg-brand-50">Blog</Link>
+              <button onClick={onOpenModal} className="ml-3 btn-primary text-sm !py-2.5 !px-5 rounded-full">
+                Find a Specialist
+              </button>
+            </nav>
+
+            <button className="lg:hidden p-2 text-gray-600" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {mobileOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-xl z-50 max-h-[80vh] overflow-y-auto">
+            <div className="px-4 pt-2 pb-6 space-y-1">
+              <Link href="/" className="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Home</Link>
+              <div className="px-3 py-2">
+                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Services</div>
+                {SERVICES.map(s => (
+                  <Link key={s.id} href={`/services/${s.id}`} className="block py-2 text-sm text-gray-600 hover:text-brand-600">{s.title}</Link>
+                ))}
+              </div>
+              <Link href="/location" className="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Locations</Link>
+              <Link href="/blog" className="block px-3 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Blog</Link>
+              <div className="pt-4 px-3">
+                <button onClick={() => { onOpenModal(); setMobileOpen(false); }} className="block w-full btn-primary text-center">Find a Specialist</button>
+              </div>
+            </div>
+          </div>
+        )}
+      </header>
     </>
   );
 }
