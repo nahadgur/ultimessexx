@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
@@ -75,8 +75,8 @@ const ensureParagraphs = (html: string) => {
 };
 
 const FURTHER_READING_POOL: ReadingLink[] = [
-  { url: 'https://www.dental implants.com', label: 'Dental Implants (official site)' },
-  { url: 'https://pubmed.ncbi.nlm.nih.gov/?term=dental implants', label: 'PubMed: Dental Implants research' },
+  { url: 'https://www.dentalimplants.com', label: 'Dental Implants (official site)' },
+  { url: 'https://pubmed.ncbi.nlm.nih.gov/?term=dental+implants', label: 'PubMed: Dental Implants research' },
   { url: 'https://pubmed.ncbi.nlm.nih.gov/?term=clear+implants', label: 'PubMed: Clear implants research' },
   { url: 'https://www.mouthhealthy.org/all-topics-a-z/orthodontics', label: 'MouthHealthy (ADA): Orthodontics' },
   { url: 'https://www.nhs.uk/conditions/orthodontics/', label: 'NHS: Orthodontics' },
@@ -218,32 +218,52 @@ export default function ArticlePage() {
       <Navigation onOpenModal={() => setIsModalOpen(true)} />
 
       {showScrollTop && (
-        <button onClick={scrollToTop}
-          className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-slate-100 border border-slate-200 shadow-lg flex items-center justify-center text-slate-500">
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-slate-100 border border-slate-200 shadow-lg flex items-center justify-center text-slate-500"
+        >
           <ChevronUp />
         </button>
       )}
 
       <div className="pt-28 pb-24 px-4 sm:px-6 max-w-5xl mx-auto">
         <div className="flex items-center gap-2 mb-8 text-sm text-gray-500">
-          <Link href="/blog" className="hover:text-brand-600 transition-colors font-medium">← All Articles</Link>
-          {article.wp_category && (<><span>/</span><span className="text-gray-400">{article.wp_category}</span></>)}
+          <Link href="/blog" className="hover:text-brand-600 transition-colors font-medium">Back to blog</Link>
+          {article.wp_category && (
+            <>
+              <span>/</span>
+              <span className="text-gray-400">{article.wp_category}</span>
+            </>
+          )}
         </div>
 
         <div className="mt-4 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
           <div className="relative h-[380px] md:h-[480px]">
             {article.featuredImage && (
-              <img src={article.featuredImage} alt={article["Article Title"]}
-                className="absolute inset-0 w-full h-full object-cover" />
+              <img
+                src={article.featuredImage}
+                alt={article['Article Title']}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/30 to-transparent" />
             <div className="absolute bottom-8 left-8 right-8 space-y-3">
               <div className="flex items-center gap-3 flex-wrap">
-                {article.wp_category && (<span className="px-3 py-1 bg-brand-600 text-white text-xs font-semibold rounded-full">{article.wp_category}</span>)}
-                <span className="text-white/60 text-xs">{article.publishDate.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}</span>
-                <span className="text-white/60 text-xs">· {Math.max(1,Math.round((article["Article Content"]||"").replace(/<[^>]*>/g,"").split(/\s+/).length/200))} min read</span>
+                {article.wp_category && (
+                  <span className="px-3 py-1 bg-brand-600 text-white text-xs font-semibold rounded-full">
+                    {article.wp_category}
+                  </span>
+                )}
+                <span className="text-white/60 text-xs">
+                  {article.publishDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </span>
+                <span className="text-white/60 text-xs">
+                  · {Math.max(1, Math.round((article['Article Content'] || '').replace(/<[^>]*>/g, '').split(/\s+/).length / 200))} min read
+                </span>
               </div>
-              <h1 className="font-display text-3xl md:text-5xl font-bold text-white leading-tight">{article["Article Title"]}</h1>
+              <h1 className="font-display text-3xl md:text-5xl font-bold text-white leading-tight">
+                {article['Article Title']}
+              </h1>
             </div>
           </div>
 
@@ -265,32 +285,58 @@ export default function ArticlePage() {
             <div>
               <p className="text-brand-300 text-xs font-semibold uppercase tracking-widest mb-2">Free Matching Service</p>
               <h2 className="text-2xl font-display font-bold mb-2">Ready to speak to a specialist?</h2>
-              <p className="text-gray-400 text-sm leading-relaxed">Our free service connects you with a GDC-verified implant specialist in your area within 2 hours. No cost, no obligation.</p>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Our free service connects you with a GDC-verified implant specialist in your area within 2 hours. No cost, no obligation.
+              </p>
             </div>
-            <button onClick={() => setIsModalOpen(true)} className="btn-primary whitespace-nowrap !px-8 !py-4">Get Matched Free</button>
+            <button onClick={() => setIsModalOpen(true)} className="btn-primary whitespace-nowrap !px-8 !py-4">
+              Get Matched Free
+            </button>
           </div>
         </div>
+
         {relatedArticles.length > 0 && (
           <div className="mt-16">
             <h2 className="text-2xl font-display font-bold text-gray-900 mb-6">Related Articles</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedArticles.map((a) => (
-                <Link key={a.Slug} href={}
-                  className="group rounded-2xl border border-gray-100 overflow-hidden flex flex-col hover:border-brand-200 hover:shadow-xl transition-all shadow-sm bg-white">
+                <Link
+                  key={a.Slug}
+                  href={`/blog/${a.Slug}`}
+                  className="group rounded-2xl border border-gray-100 overflow-hidden flex flex-col hover:border-brand-200 hover:shadow-xl transition-all shadow-sm bg-white"
+                >
                   <div className="relative h-40 overflow-hidden bg-gray-50">
-                    {a.featuredImage ? (<img src={a.featuredImage} alt={a["Article Title"]} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />) : (<div className="absolute inset-0 bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center"><span className="text-4xl opacity-30">📄</span></div>)}
+                    {a.featuredImage ? (
+                      <img
+                        src={a.featuredImage}
+                        alt={a['Article Title']}
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center">
+                        <span className="text-4xl opacity-30">placeholder</span>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent" />
-                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-brand-600 text-white text-[10px] font-semibold rounded-full">{a.wp_category}</div>
+                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-brand-600 text-white text-[10px] font-semibold rounded-full">
+                      {a.wp_category}
+                    </div>
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="text-base font-display font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors leading-snug">{a["Article Title"]}</h3>
-                    <div className="flex items-center gap-1 text-brand-600 font-medium text-sm mt-auto">Read article <ArrowUpRight className="w-3.5 h-3.5" /></div>
+                    <h3 className="text-base font-display font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors leading-snug">
+                      {a['Article Title']}
+                    </h3>
+                    <div className="flex items-center gap-1 text-brand-600 font-medium text-sm mt-auto">
+                      Read article <ArrowUpRight className="w-3.5 h-3.5" />
+                    </div>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
         )}
+
         {furtherReading.length > 0 && (
           <div className="mt-12 p-6 bg-gray-50 rounded-2xl border border-gray-100">
             <h2 className="text-lg font-display font-bold text-gray-900 mb-4">Further Reading &amp; Clinical Sources</h2>
@@ -298,7 +344,14 @@ export default function ArticlePage() {
               {furtherReading.map((l) => (
                 <li key={l.url} className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-600 flex-shrink-0"></span>
-                  <a href={l.url} target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:text-brand-700 text-sm font-medium underline underline-offset-2">{l.label}</a>
+                  <a
+                    href={l.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand-600 hover:text-brand-700 text-sm font-medium underline underline-offset-2"
+                  >
+                    {l.label}
+                  </a>
                 </li>
               ))}
             </ul>
