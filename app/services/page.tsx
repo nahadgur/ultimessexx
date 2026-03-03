@@ -36,24 +36,24 @@ service.id === 'crossbite' ? <Globe className="w-8 h-8" /> :
 }));
 
 return (
-<div className="min-h-screen bg-white text-slate-700">
+<div className="min-h-screen bg-white">
 <LeadFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 <Navigation onOpenModal={() => setIsModalOpen(true)} />
 
 <button
 onClick={scrollToTop}
-className={`fixed bottom-6 left-6 z-[70] w-12 h-12 bg-slate-100 border border-slate-200 text-slate-500 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+className={`fixed bottom-6 left-6 z-[70] w-10 h-10 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
 >
 <ChevronUp className="w-6 h-6" />
 </button>
 
-<div className="pt-32 pb-24 min-h-screen bg-white">
-<div className="max-w-7xl mx-auto px-4 space-y-16">
-<div className="text-center space-y-6">
-<h1 className="font-display text-4xl md:text-7xl font-black text-slate-900 leading-tight">
+<div className="section-padding bg-white">
+<div className="container-width space-y-16">
+<div className="text-center mb-14">
+<h1 className="text-3xl md:text-4xl font-display font-bold text-gray-900">
 Elite Dental Implants <span className="text-blue-500 italic">Treatments</span>
 </h1>
-<p className="text-xl text-slate-500 max-w-3xl mx-auto leading-relaxed font-medium">
+<p className="text-lg text-gray-600 max-w-2xl mx-auto">
 Customised dental implant solutions for every clinical challenge, from complex bite issues to lifestyle-focused adult treatment.
 </p>
 </div>
@@ -63,17 +63,17 @@ Customised dental implant solutions for every clinical challenge, from complex b
 <Link
 key={service.id}
 href={`/services/${service.id}`}
-className="group bg-white p-10 rounded-[2.5rem] border border-slate-100 hover:border-blue-300 hover:shadow-lg transition-all flex flex-col shadow-sm"
+className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 p-8 flex flex-col"
 >
-<div className={`mb-6 p-4 rounded-2xl bg-blue-50 text-blue-500 inline-flex self-start`}>
+<div className={`mb-4 w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600`}>
 {service.icon}
 </div>
-<h2 className="text-2xl font-black text-slate-900 mb-4 group-hover:text-blue-500 transition-colors">
+<h2 className="text-xl font-display font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors">
 {service.title}
 </h2>
-<p className="text-slate-500 font-medium mb-8 flex-1">{service.desc}</p>
-<div className="flex items-center gap-2 text-blue-500 font-black uppercase tracking-widest text-[10px]">
-View All Locations <ArrowUpRight className="w-4 h-4" />
+<p className="text-gray-600 text-sm mb-6 flex-1">{service.desc}</p>
+<div className="flex items-center gap-2 text-brand-600 font-medium text-sm">
+Learn more <ArrowUpRight className="w-4 h-4" />
 </div>
 </Link>
 ))}
