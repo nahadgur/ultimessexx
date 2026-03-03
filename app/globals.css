@@ -2,94 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-white text-slate-700;
-  }
+:root {
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+}
 
-  /* Hide scrollbars everywhere */
-  * {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  *::-webkit-scrollbar {
-    display: none; /* Chrome/Safari/Opera */
+  body {
+    @apply font-sans text-gray-700 bg-white;
+  }
+  h1, h2, h3 {
+    @apply font-display;
   }
 }
 
 @layer components {
-  .glass-effect {
-    @apply bg-white/80 backdrop-blur-lg border-b border-slate-200;
+  .btn-primary {
+    @apply bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg inline-block;
   }
-
-  .light-card {
-    @apply bg-white border border-slate-100 shadow-sm;
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-gray-900 font-semibold py-3 px-6 rounded-xl border border-gray-200 transition-all duration-200 inline-block;
   }
-
-  .pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+  .section-padding {
+    @apply py-20 md:py-24;
   }
-
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
-    }
-    50% {
-      box-shadow: 0 0 80px rgba(59, 130, 246, 0.35);
-    }
+  .container-width {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-
   @keyframes slow-zoom {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
   }
-
-  .animate-slow-zoom {
-    animation: slow-zoom 20s ease-in-out infinite;
-  }
-
+  .animate-slow-zoom { animation: slow-zoom 20s ease-in-out infinite; }
   @keyframes gradient {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
-
-  .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient 3s ease infinite;
-  }
-
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-marquee {
-    animation: marquee 40s linear infinite;
-  }
-
-  .animate-marquee:hover {
-    animation-play-state: paused;
-  }
-
-  .faq-item .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-  }
-
-  .faq-item.active .faq-answer {
-    max-height: 500px;
-  }
+  .animate-gradient { background-size: 200% 200%; animation: gradient 3s ease infinite; }
+  @keyframes backdrop-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+  @keyframes backdrop-out { 0% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes modal-in { 0% { opacity: 0; transform: scale(0.95) translateY(16px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+  @keyframes modal-out { 0% { opacity: 1; transform: scale(1) translateY(0); } 100% { opacity: 0; transform: scale(0.95) translateY(16px); } }
+  .animate-backdrop-in { animation: backdrop-in 0.3s ease-out; }
+  .animate-backdrop-out { animation: backdrop-out 0.3s ease-in; }
+  .animate-modal-in { animation: modal-in 0.3s ease-out; }
+  .animate-modal-out { animation: modal-out 0.3s ease-in; }
 }
