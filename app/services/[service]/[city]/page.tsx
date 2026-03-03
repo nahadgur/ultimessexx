@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CheckCircle, Clock, Shield, Award, MapPin, ChevronUp, Users } from '@/components/Icons';
+import { Users, Sparkles, Shield, Medal, Globe, User, ArrowUpRight, ChevronUp, MapPin, CheckCircle, Clock, Award } from '@/components/Icons';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import FAQSection from '@/components/FAQSection';
@@ -10,174 +10,13 @@ import { SERVICES, LOCATIONS, FAQS_SERVICES } from '@/lib/data';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-const SERVICE_IMAGES: Record<string, string> = {
-  'single-tooth': 'https://images.unsplash.com/photo-1593022356769-11f762e25ed9?q=80&w=1170&auto=format&fit=crop',
-  'multiple-teeth': 'https://images.pexels.com/photos/6502343/pexels-photo-6502343.jpeg',
-  'full-arch': 'https://images.pexels.com/photos/4687905/pexels-photo-4687905.jpeg',
-  'bone-grafting': 'https://images.pexels.com/photos/6629364/pexels-photo-6629364.jpeg',
-  'immediate-implants': 'https://images.pexels.com/photos/5355826/pexels-photo-5355826.jpeg',
-  'implant-dentures': 'https://images.pexels.com/photos/3779699/pexels-photo-3779699.jpeg',
-};
-
-function HeroLeadForm({ cityName }: { cityName: string }) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const form = e.currentTarget;
-      const fullName = (form.elements.namedItem('fullName') as HTMLInputElement).value;
-      const phone = (form.elements.namedItem('phone') as HTMLInputElement).value;
-      const email = (form.elements.namedItem('email') as HTMLInputElement).value;
-      const treatment = (form.elements.namedItem('treatment') as HTMLSelectElement).value;
-
-      const payload = {
-        fullName,
-        phone,
-        email,
-        treatment,
-        location: cityName,
-        page: typeof window !== 'undefined' ? window.location.href : '',
-        source: 'Essex Dental Implants - Hero Form',
-      };
-
-      const res = await fetch(
-        'https://script.google.com/macros/s/AKfycbz-B9H0JTI7a9Cgyn9z-pZXKnuiNm6acAn8Zb13N21qGRcpxy7EtVvlPAjpl6f7Hj3-RQ/exec',
-        { method: 'POST', body: JSON.stringify(payload) }
-      );
-
-      const text = await res.text();
-      let data: Record<string, unknown> = {};
-      try { data = JSON.parse(text); } catch {}
-      if (data && data.ok === false) throw new Error((data.error as string) || 'Submission failed');
-
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    } catch (err) {
-      console.error(err);
-      setIsSubmitting(false);
-      alert('Something went wrong. Please try again.');
-    }
-  };
-
-  return (
-    <div className="w-full rounded-2xl bg-white shadow-[0_32px_80px_-8px_rgba(0,0,0,0.12)] border border-gray-100 overflow-hidden">
-      <div className="p-8 md:p-10">
-        {isSuccess ? (
-          <div className="flex flex-col items-center text-center py-10 space-y-5">
-            <div className="w-20 h-20 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center shadow-lg shadow-brand-500/10">
-              <CheckCircle className="w-12 h-12" />
-            </div>
-            <div>
-              <h3 className="text-2xl font-display font-bold text-gray-900 mb-2">Request Received!</h3>
-              <p className="text-gray-600 leading-relaxed text-sm">
-                We&apos;ve matched you with a Platinum Partner in {cityName}. Check your email for next steps.
-              </p>
-            </div>
-          </div>
-        ) : (
-          <>
-            <div className="mb-6">
-              <div className="inline-block px-3 py-1 bg-brand-50 text-brand-600 text-xs font-bold uppercase tracking-widest rounded-full mb-3">
-                Free Matching Service
-              </div>
-              <h3 className="text-2xl font-display font-bold text-gray-900 leading-tight">
-                Get Matched in {cityName}
-              </h3>
-              <p className="text-gray-600 text-sm mt-1 font-medium">
-                Top local clinics will contact you within 2 hours
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <input
-                required
-                name="fullName"
-                type="text"
-                placeholder="Full Name *"
-                className="w-full px-4 py-3.5 bg-gray-50 rounded-xl border border-gray-200 text-gray-700 text-sm focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-400/10 outline-none transition-all placeholder:text-gray-300"
-              />
-
-              <div className="grid grid-cols-2 gap-3">
-                <input
-                  required
-                  name="phone"
-                  type="tel"
-                  placeholder="Phone Number *"
-                  className="w-full px-4 py-3.5 bg-gray-50 rounded-xl border border-gray-200 text-gray-700 text-sm focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-400/10 outline-none transition-all placeholder:text-gray-300"
-                />
-                <input
-                  required
-                  name="email"
-                  type="email"
-                  placeholder="Email Address *"
-                  className="w-full px-4 py-3.5 bg-gray-50 rounded-xl border border-gray-200 text-gray-700 text-sm focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-400/10 outline-none transition-all placeholder:text-gray-300"
-                />
-              </div>
-
-              <select
-                required
-                name="treatment"
-                defaultValue=""
-                className="w-full px-4 py-3.5 bg-gray-50 rounded-xl border border-gray-200 text-gray-700 text-sm focus:border-blue-400 focus:bg-white focus:ring-4 focus:ring-blue-400/10 outline-none transition-all appearance-none cursor-pointer"
-              >
-                <option value="" disabled>Select Treatment *</option>
-                {SERVICES.map(s => (
-                  <option key={s.id} value={s.title}>{s.title}</option>
-                ))}
-                <option value="Not Sure Yet">Not Sure Yet</option>
-              </select>
-
-              <button
-                disabled={isSubmitting}
-                type="submit"
-                className="w-full py-4 bg-brand-500 hover:bg-brand-700 text-white font-bold text-base rounded-xl shadow-xl shadow-brand-500/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2 relative overflow-hidden group/btn mt-1"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
-                {isSubmitting ? (
-                  <div className="w-5 h-5 border-4 border-white/30 border-t-white rounded-full animate-spin" />
-                ) : (
-                  <>
-                    Get 3 Free Quotes
-                    <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </>
-                )}
-              </button>
-
-              <div className="flex items-center justify-center gap-4 pt-1">
-                {['100% Free', 'No Spam', '2hr Response'].map((label) => (
-                  <span key={label} className="flex items-center gap-1.5 text-[11px] text-gray-600 font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-500 inline-block" />
-                    {label}
-                  </span>
-                ))}
-              </div>
-            </form>
-          </>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default function ServiceCityPage({ params }: { params: { service: string; city: string } }) {
+export default function CityServicesPage({ params }: { params: { city: string } }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const service = SERVICES.find(s => s.id === params.service);
   const allCities = Object.values(LOCATIONS).flat();
-  const cityName = allCities.find(city =>
-    city.toLowerCase().replace(/\s+/g, '-') === params.city
-  );
-
-  if (!service || !cityName) notFound();
-
-  const heroImage = SERVICE_IMAGES[params.service] || SERVICE_IMAGES['single-tooth'];
+  const cityName = allCities.find(city => city.toLowerCase().replace(/\s+/g, '-') === params.city);
+  if (!cityName) notFound();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -189,203 +28,197 @@ export default function ServiceCityPage({ params }: { params: { service: string;
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  const benefits = [
-    { icon: <Shield className="w-6 h-6" />, title: 'Verified Specialists', desc: 'Every provider in our network is vetted for qualifications and patient outcomes.' },
-    { icon: <Clock className="w-6 h-6" />, title: 'Fast Response', desc: 'Receive your personalised match within 2 hours of submission.' },
-    { icon: <Award className="w-6 h-6" />, title: 'Free Service', desc: 'Our matching service is completely free. No hidden fees or obligations.' },
-    { icon: <Users className="w-6 h-6" />, title: 'Multiple Options', desc: 'Compare quotes from up to 3 top-rated specialists in your area.' },
-  ];
-
-  const treatmentSteps = [
-    'Submit your details through our quick matching form above',
-    'Our team reviews your case and identifies the best local specialists',
-    'Receive up to 3 personalised quotes from verified providers within 2 hours',
-    'Book your free consultation with your chosen specialist',
-    'Begin your treatment journey with expert guidance every step of the way',
-  ];
+  const servicesWithIcons = SERVICES.map(service => ({
+    ...service,
+    icon: service.id === 'single-tooth' ? <Shield className="w-7 h-7" /> :
+          service.id === 'multiple-teeth' ? <Users className="w-7 h-7" /> :
+          service.id === 'full-arch' ? <Medal className="w-7 h-7" /> :
+          service.id === 'bone-grafting' ? <Globe className="w-7 h-7" /> :
+          service.id === 'immediate-implants' ? <Sparkles className="w-7 h-7" /> :
+          <User className="w-7 h-7" />
+  }));
 
   return (
     <div className="min-h-screen bg-white">
       <LeadFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <Navigation onOpenModal={() => setIsModalOpen(true)} />
 
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-6 left-6 z-[70] w-10 h-10 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center transition-all duration-500 shadow-lg ${
-          showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <ChevronUp className="w-6 h-6" />
+      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className={`fixed bottom-6 left-6 z-[70] w-10 h-10 bg-white border border-gray-200 text-gray-500 rounded-full flex items-center justify-center transition-all duration-300 shadow-md ${showScrollTop ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <ChevronUp className="w-5 h-5" />
       </button>
 
       {/* HERO */}
-      <div className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 md:pt-32 md:pb-24 min-h-[640px] sm:min-h-[680px] md:min-h-[720px]">
-        <div className="absolute inset-0 z-0">
-          <img src={heroImage} alt={service.title} className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/40 to-gray-900/90" />
-        </div>
-
-        <div className="relative z-10 container-width sm:px-6 space-y-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20 text-sm text-white/70 backdrop-blur-sm">
-            <Link href="/services" className="hover:text-blue-400 transition-colors">All Services</Link>
+      <section className="section-padding bg-white border-b border-gray-100">
+        <div className="container-width">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-500 mb-6">
+            <Link href="/location" className="hover:text-brand-600 transition-colors">All Locations</Link>
             <span>/</span>
-            <Link href={`/services/${params.service}`} className="hover:text-blue-400 transition-colors">{service.title}</Link>
-            <span>/</span>
-            <span className="text-white">{cityName}</span>
+            <span className="text-gray-900 font-medium">{cityName}</span>
           </div>
-
-          <div className="grid lg:grid-cols-[1fr_420px] gap-10 lg:gap-16 items-start">
-            <div className="space-y-6 pt-2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-500/20 rounded-full border border-blue-400/30 text-sm text-blue-300 backdrop-blur-sm">
-                <MapPin className="w-4 h-4 flex-shrink-0" />
-                <span>Elite Platinum Providers Available</span>
+          <div className="grid lg:grid-cols-[1fr_360px] gap-12 items-start">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-brand-50 border border-brand-200 text-brand-600 text-xs font-semibold uppercase tracking-widest rounded-full mb-4">
+                <MapPin className="w-3.5 h-3.5" /> Verified Specialists in {cityName}
               </div>
-
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-[1.1] tracking-tight drop-shadow-lg">
-                {service.title}
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-400 italic mt-1">
-                  in {cityName}
-                </span>
+              <h1 className="text-3xl md:text-5xl font-display font-bold text-gray-900 mb-4 leading-tight">
+                Dental Implants in <span className="text-brand-600">{cityName}</span>
               </h1>
-
-              <p className="text-lg text-white/80 leading-relaxed font-medium max-w-lg">
-                Access {cityName}&apos;s most experienced {service.title.toLowerCase()} specialists.
-                Choose from our comprehensive treatment options below.
+              <p className="text-lg text-gray-600 leading-relaxed mb-6 max-w-xl">
+                Find independently vetted dental implant specialists in {cityName}. Our network covers every implant treatment type — from single tooth replacements to full arch restorations — with transparent pricing, 0% finance options, and same-week consultation availability across {cityName} and the surrounding area.
               </p>
-
-              <div className="flex flex-wrap gap-5 pt-1">
-                {['Free Consultation', 'No Obligation', 'Same-week Appointments'].map((label) => (
-                  <div key={label} className="flex items-center gap-2 text-sm text-white/80 font-semibold">
-                    <span className="w-5 h-5 rounded-full bg-brand-500/20 text-blue-400 flex items-center justify-center text-xs font-bold flex-shrink-0">✓</span>
+              <div className="flex flex-wrap gap-4 mb-8">
+                {['Free Consultation', 'No Obligation', '2hr Callback', '0% Finance Available'].map((label) => (
+                  <div key={label} className="flex items-center gap-1.5 text-sm text-gray-600 font-medium">
+                    <span className="w-4 h-4 rounded-full bg-brand-600 flex items-center justify-center flex-shrink-0">
+                      <span className="text-white text-[9px] font-bold">✓</span>
+                    </span>
                     {label}
                   </div>
                 ))}
               </div>
+              <button onClick={() => setIsModalOpen(true)} className="btn-primary text-lg !px-8 !py-4">
+                Book Free {cityName} Consultation
+              </button>
             </div>
-
-            <div className="w-full">
-              <HeroLeadForm cityName={cityName} />
+            <div className="bg-gray-50 rounded-2xl border border-gray-100 p-7 shadow-sm">
+              <h3 className="font-display font-bold text-gray-900 text-lg mb-5">Why patients choose our {cityName} network</h3>
+              <div className="space-y-4">
+                {[
+                  { icon: <Shield className="w-5 h-5 text-brand-600" />, title: 'GDC-Verified Clinicians', desc: 'Every {cityName} specialist holds active GDC registration and full professional indemnity cover.' },
+                  { icon: <Clock className="w-5 h-5 text-brand-600" />, title: 'Fast Appointments', desc: 'Most providers offer initial consultations within 3–5 working days of your enquiry.' },
+                  { icon: <Award className="w-5 h-5 text-brand-600" />, title: 'Finance Available', desc: 'Spread treatment costs over 12–60 months with 0% interest at selected practices.' },
+                  { icon: <CheckCircle className="w-5 h-5 text-brand-600" />, title: 'Free Matching Service', desc: 'We match you to the right specialist at no cost. No hidden fees, ever.' },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-3">
+                    <div className="flex-shrink-0 mt-0.5">{item.icon}</div>
+                    <div>
+                      <p className="font-semibold text-gray-900 text-sm">{item.title}</p>
+                      <p className="text-gray-500 text-sm mt-0.5 leading-snug">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* REST OF PAGE */}
-      <div className="pb-24 bg-white">
-        <div className="container-width sm:px-6 space-y-16">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {benefits.map((benefit, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-                <div className="mb-4 p-3 rounded-xl bg-brand-50 text-brand-600 inline-flex">
-                  {benefit.icon}
+      {/* TREATMENTS */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-width">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-3">
+              Available Treatments in {cityName}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              All six implant treatment types are available through our {cityName} network. Select a treatment to see local availability, what the procedure involves, and indicative pricing specific to {cityName} clinics.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {servicesWithIcons.map((service) => (
+              <Link key={service.id} href={`/services/${service.id}/${params.city}`}
+                className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-200 transition-all p-7 flex flex-col">
+                <div className="mb-4 w-11 h-11 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600">
+                  {service.icon}
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{benefit.title}</h3>
-                <p className="text-sm text-gray-600">{benefit.desc}</p>
-              </div>
+                <h3 className="text-lg font-display font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">
+                  {service.title} in {cityName}
+                </h3>
+                <p className="text-gray-500 text-sm mb-5 flex-1 leading-relaxed">{service.desc}</p>
+                <div className="flex items-center gap-1.5 text-brand-600 font-semibold text-sm">
+                  View {cityName} specialists <ArrowUpRight className="w-4 h-4" />
+                </div>
+              </Link>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="bg-white p-10 md:p-14 rounded-2xl border border-gray-100 shadow-sm">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-8 text-center">
-              Your Treatment Journey in {cityName}
-            </h2>
-            <div className="space-y-4 max-w-3xl mx-auto">
-              {treatmentSteps.map((step, idx) => (
-                <div key={idx} className="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-brand-50 border border-brand-200 flex items-center justify-center text-blue-600 font-bold text-sm">
-                    {idx + 1}
-                  </div>
-                  <p className="text-gray-600 font-medium pt-1">{step}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-10 rounded-2xl border border-gray-100 shadow-sm">
-              <h3 className="text-2xl font-display font-bold text-gray-900 mb-6">
-                Why Choose {service.title} in {cityName}?
-              </h3>
-              <div className="space-y-4">
-                {[
-                  'Access to Platinum-certified providers with proven track records',
-                  'State-of-the-art 3D scanning and 3D treatment planning visualization technology',
-                  `Convenient ${cityName} locations with flexible appointment times`,
-                  'Comprehensive aftercare and retention planning included',
-                ].map((text, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-brand-600 flex-shrink-0 mt-1" />
-                    <p className="text-gray-600">{text}</p>
-                  </div>
-                ))}
+      {/* EDITORIAL */}
+      <section className="section-padding bg-white">
+        <div className="container-width">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-5">
+                What to Expect from Dental Implant Treatment in {cityName}
+              </h2>
+              <div className="space-y-4 text-gray-600 leading-relaxed text-[15px]">
+                <p>
+                  Dental implant treatment in {cityName} follows the same evidence-based protocol used by leading specialists worldwide, but your outcome depends heavily on the diagnostic technology available at the practice and the volume of cases the clinician handles each year. Every provider in our {cityName} network operates with in-house CBCT 3D scanning — a non-negotiable requirement in our vetting process, since accurate pre-surgical imaging directly reduces complications and improves long-term implant success rates.
+                </p>
+                <p>
+                  A standard single implant course in {cityName} typically spans three to six months from your first consultation through to final crown fitting. This timeline can be shorter if no preparatory treatment is needed, or longer if bone grafting is required before the implant post can be placed. Patients who qualify for immediate load protocols — sometimes called teeth-in-a-day — can leave their surgical appointment with a temporary restoration already in place.
+                </p>
+                <p>
+                  Costs in {cityName} are broadly in line with the national average for private implant dentistry. Single tooth implants typically range from £1,800 to £3,200 inclusive of the post, abutment, and ceramic crown. Full arch restorations using the All-on-4 or All-on-6 technique are generally priced between £9,000 and £18,000 per arch. Every practice in our {cityName} network provides a written, itemised treatment plan before any procedure begins — you will never face an unexpected invoice.
+                </p>
+                <p>
+                  Long-term success figures for implants placed by experienced clinicians are consistently strong. Studies show survival rates above 97% at ten years when patients maintain good oral hygiene and attend annual monitoring appointments. Our {cityName} specialists include a structured aftercare schedule — covering a 3-month integration review, a 12-month check, and annual hygiene visits — as standard in every treatment plan.
+                </p>
               </div>
             </div>
-
-            <div className="bg-brand-50/50 p-10 rounded-2xl border border-blue-200">
-              <h3 className="text-2xl font-display font-bold text-gray-900 mb-6">Ready to Transform Your Smile?</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Our {cityName} network is ready to assess your case and create a personalised treatment plan. Get matched with the perfect provider for your{' '}
-                {service.title.toLowerCase()} needs.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {['Free initial consultation', 'No obligation assessment', 'Transparent pricing from the start'].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-gray-600">
-                    <CheckCircle className="w-5 h-5 text-brand-600 flex-shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="w-full px-8 py-5 bg-brand-500 text-white font-bold rounded-full shadow-2xl hover:scale-105 transition-all"
-              >
-                Book Your {cityName} Consultation
+            <div className="space-y-6">
+              <div className="bg-gray-50 rounded-2xl border border-gray-100 p-8">
+                <h3 className="font-display font-bold text-gray-900 text-lg mb-5">Indicative Costs in {cityName}</h3>
+                <div className="space-y-4">
+                  {[
+                    { treatment: 'Single Tooth Implant', range: '£1,800 – £3,200', note: 'Includes post, abutment and ceramic crown.' },
+                    { treatment: 'Multiple Teeth (per implant)', range: '£1,600 – £2,800', note: 'Bridge options may reduce total cost.' },
+                    { treatment: 'Full Arch (All-on-4)', range: '£9,000 – £15,000', note: 'Per arch. Provisional teeth same day.' },
+                    { treatment: 'Implant-Retained Denture', range: '£3,500 – £7,000', note: '2–4 implants per arch.' },
+                    { treatment: 'Bone Graft (if required)', range: '£500 – £2,500', note: 'Varies by volume and graft type.' },
+                  ].map((item, i) => (
+                    <div key={i} className="flex justify-between items-start gap-4 pb-4 border-b border-gray-100 last:border-0 last:pb-0">
+                      <div>
+                        <p className="font-semibold text-gray-900 text-sm">{item.treatment}</p>
+                        <p className="text-gray-400 text-xs mt-0.5">{item.note}</p>
+                      </div>
+                      <p className="text-brand-600 font-bold text-sm whitespace-nowrap">{item.range}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-gray-400 text-xs mt-4 leading-relaxed">All prices indicative. Your specialist will provide an exact written quote before treatment begins.</p>
+              </div>
+              <button onClick={() => setIsModalOpen(true)} className="btn-primary w-full text-center !py-4">
+                Get Your Free {cityName} Quote
               </button>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="bg-white p-10 rounded-2xl border border-gray-100 shadow-sm">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Other Treatments in {cityName}</h3>
-                <div className="space-y-2">
-                  {SERVICES.filter(s => s.id !== params.service).slice(0, 5).map(s => (
-                    <Link
-                      key={s.id}
-                      href={`/services/${s.id}/${params.city}`}
-                      className="block px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-200 text-gray-600 hover:text-gray-900 transition-all text-sm font-medium"
-                    >
-                      {s.title} in {cityName}
-                    </Link>
-                  ))}
-                </div>
+      {/* HOW IT WORKS */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-width">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-3">How the Matching Process Works</h2>
+            <p className="text-gray-600 max-w-xl mx-auto">From your first enquiry to your consultation in {cityName} — here is exactly what happens next.</p>
+          </div>
+          <div className="grid md:grid-cols-5 gap-4">
+            {[
+              { n: '01', title: 'Submit Your Details', desc: 'Complete our 90-second form. Tell us your location, treatment interest, and best contact time.' },
+              { n: '02', title: 'Case Review', desc: 'Our team identifies the best-matched {cityName} specialists for your specific situation.' },
+              { n: '03', title: 'Receive Quotes', desc: 'Up to three itemised quotes from verified {cityName} providers arrive within 2 hours.' },
+              { n: '04', title: 'Book Consultation', desc: 'Choose your preferred specialist and book a free, no-obligation initial appointment.' },
+              { n: '05', title: 'Begin Treatment', desc: 'Your specialist builds a personalised plan. You proceed entirely at your own pace.' },
+            ].map((item) => (
+              <div key={item.n} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center">
+                <span className="text-3xl font-display font-bold text-gray-100 block mb-3">{item.n}</span>
+                <h3 className="font-display font-bold text-gray-900 text-sm mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title} in Other Cities</h3>
-                <div className="space-y-2">
-                  {allCities.filter(c => c !== cityName).slice(0, 5).map(city => {
-                    const slug = city.toLowerCase().replace(/\s+/g, '-');
-                    return (
-                      <Link
-                        key={city}
-                        href={`/services/${params.service}/${slug}`}
-                        className="block px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 hover:border-brand-200 text-gray-600 hover:text-gray-900 transition-all text-sm font-medium"
-                      >
-                        {service.title} in {city}
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <button onClick={() => setIsModalOpen(true)} className="btn-primary !px-10 !py-4">
+              Start Now — Takes 90 Seconds
+            </button>
           </div>
         </div>
+      </section>
 
-        <FAQSection faqs={FAQS_SERVICES} />
-      </div>
-
+      <FAQSection faqs={FAQS_SERVICES} />
       <Footer />
     </div>
   );
