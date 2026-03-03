@@ -21,7 +21,7 @@ return(
 <div className='min-h-screen bg-white'>
 <LeadFormModal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}/>
 <Navigation onOpenModal={()=>setIsModalOpen(true)}/>
-<button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} className='fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50'><ChevronUp className='w-5 h-5'/></button>
+{showScrollTop&&<button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})} className='fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50'><ChevronUp className='w-5 h-5'/></button>}
 
 <section className='section-padding bg-white border-b border-gray-100'>
 <div className='container-width text-center'>
@@ -30,6 +30,7 @@ return(
 <p className='text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed'>Whether you need to replace a single missing tooth or restore an entire arch, our specialist network covers every form of implant dentistry. Each treatment is carried out by independently vetted consultants with a minimum of 100 successful placements per year — not a general dentist moonlighting in implants.</p>
 </div>
 </section>
+
 <section className="section-padding bg-gray-50">
 <div className="container-width">
 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -44,6 +45,7 @@ return(
 </div>
 </div>
 </section>
+
 <section className="section-padding bg-white">
 <div className="container-width">
 <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -53,12 +55,16 @@ return(
 <p>Dental implants have been the clinically preferred solution for missing teeth for over 40 years. Unlike dentures, which sit on the gum and transfer bite forces onto soft tissue, or bridges, which grind down neighbouring healthy teeth for support, implants are titanium posts surgically placed directly into the jawbone. This replicates the root structure of a natural tooth, giving them unmatched stability, bone-preserving properties, and a longevity no other restoration can match.</p>
 <p>UK patients are increasingly choosing implants as awareness of their long-term value grows. A single implant typically costs between 1,500 and 3,500 GBP depending on complexity. With a lifespan of 20 to 30 years when properly maintained, the cost-per-year is frequently lower than repeatedly replacing dentures or repairing bridges. The NHS does not routinely fund implants, but many private practices now offer 0 percent finance plans spread over 12 to 60 months.</p>
 <p>The Essex Dental Implants network sources only consultants working with premium implant systems including Nobel Biocare, Straumann, and Osstem, and who invest in in-house 3D CBCT imaging for precise placement. If a case requires a bone graft or sinus lift, our providers manage the full care pathway in-house.</p>
-</div></div>
+</div>
+</div>
 <div>
 <h3 className="text-xl font-display font-bold text-gray-900 mb-5">Choosing the Right Treatment</h3>
 <div className="space-y-3">
 </div>
 </div>
+</div>
+</div>
+</section>
 
 <section className="section-padding bg-gray-50">
 <div className="container-width">
